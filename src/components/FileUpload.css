@@ -1,0 +1,104 @@
+.file-upload-container {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.file-upload-area {
+  border: 2px dashed #cbd5e1;
+  border-radius: 12px;
+  padding: 48px 24px;
+  text-align: center;
+  background-color: #f8fafc;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.file-upload-area:hover {
+  border-color: #2563eb;
+  background-color: #eff6ff;
+}
+
+.file-upload-area.dragging {
+  border-color: #2563eb;
+  background-color: #dbeafe;
+  transform: scale(1.02);
+}
+
+.file-upload-area.uploading {
+  border-color: #16a34a;
+  background-color: #f0fdf4;
+  cursor: default;
+}
+
+.upload-icon {
+  font-size: 48px;
+  margin-bottom: 16px;
+}
+
+.upload-text-primary {
+  font-size: 18px;
+  font-weight: 600;
+  color: #334155;
+  margin: 8px 0;
+}
+
+.upload-text-secondary {
+  font-size: 14px;
+  color: #64748b;
+  margin: 4px 0;
+}
+
+.upload-formats {
+  font-size: 12px;
+  color: #94a3b8;
+  margin-top: 12px;
+}
+
+.upload-status {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.upload-status p {
+  font-size: 16px;
+  color: #16a34a;
+  font-weight: 500;
+  margin: 0;
+}
+
+/* Spinner animation */
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid #e2e8f0;
+  border-top: 4px solid #2563eb;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  .file-upload-area {
+    padding: 32px 16px;
+  }
+
+  .upload-icon {
+    font-size: 36px;
+  }
+
+  .upload-text-primary {
+    font-size: 16px;
+  }
+}
