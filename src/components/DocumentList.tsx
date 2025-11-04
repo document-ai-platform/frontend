@@ -16,10 +16,7 @@ interface DocumentListProps {
   onDocumentClick?: (document: Document) => void;
 }
 
-const DocumentList: React.FC<DocumentListProps> = ({
-  refreshTrigger,
-  onDocumentClick,
-}) => {
+const DocumentList: React.FC<DocumentListProps> = ({ refreshTrigger }) => {
   const [documents, setDocuments] = useState<Document[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string>("");
@@ -46,6 +43,20 @@ const DocumentList: React.FC<DocumentListProps> = ({
       setError(err instanceof Error ? err.message : "Failed to load documents");
     } finally {
       setLoading(false);
+    }
+  };
+
+  const fetchDocumentDetails = async (documentId: number) => {
+    try {
+      const response = await fetch(`${API_BASE_URL}/documents/${documentId}`);
+      if (!response.ok) {
+        throw new Error("Failed to fetch document details");
+      }
+      const data = await response.json();
+      return data;
+    } catch (err) {
+      console.error(err);
+      return null;
     }
   };
 
@@ -102,10 +113,15 @@ const DocumentList: React.FC<DocumentListProps> = ({
 
   // Handle row click
   const handleRowClick = (document: Document) => {
-    setSelectedDocument(document);
-    if (onDocumentClick) {
-      onDocumentClick(document);
-    }
+    fetchDocumentDetails(document.id).then((detailedDoc) => {
+      if (detailedDoc) {
+        setSelectedDocument(detailedDoc);
+      }
+    });
+    // setSelectedDocument(document);
+    // if (onDocumentClick) {
+    //   onDocumentClick(document);
+    // }
   };
 
   // Close detail modal
